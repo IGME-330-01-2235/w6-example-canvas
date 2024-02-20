@@ -8,34 +8,65 @@ canvas.height = SIZE
 
 const context = canvas.getContext('2d') as CanvasRenderingContext2D
 
-// type to hold points
 interface Point {
   x: number
   y: number
 }
 
-// target represents where we want to be, eventually
 const target: Point = { x: SIZE / 2, y: SIZE / 2 }
-// position represents where we are right now
 const position: Point = { x: SIZE / 2, y: SIZE / 2 }
 
-context.fillStyle = 'white'
-context.fillRect(0, 0, SIZE, SIZE)
-
 const clear = () => {
-  context.fillStyle = 'rgba(102, 51, 153, 0.1)'
+  context.fillStyle = 'rebeccapurple'
   context.fillRect(0, 0, SIZE, SIZE)
 }
 
 const drawCursor = () => {
-  context.fillStyle = 'white'
+  // use a 0.5 number for crisp 1px lines on the pixel grid
+  const center: Point = {
+    x: Math.floor(position.x) + 0.5,
+    y: Math.floor(position.y) + 0.5,
+  }
+
+  context.strokeStyle = 'white'
+  context.lineWidth = 1
   context.beginPath()
-  context.arc(position.x, position.y, 5, 0, 2 * Math.PI)
-  context.fill()
+  // draw the plus in the center
+  context.moveTo(center.x - 4.5, center.y)
+  context.lineTo(center.x + 4.5, center.y)
+  context.moveTo(center.x, center.y - 4.5)
+  context.lineTo(center.x, center.y + 4.5)
+
+  // draw the top left bracket
+  context.moveTo(center.x - 15, center.y - 9.5)
+  context.lineTo(center.x - 15, center.y - 15)
+  context.lineTo(center.x - 9.5, center.y - 15)
+
+  // draw the top right bracket
+  context.moveTo(center.x + 15, center.y - 9.5)
+  context.lineTo(center.x + 15, center.y - 15)
+  context.lineTo(center.x + 9.5, center.y - 15)
+
+  // draw the bottom left bracket
+  context.moveTo(center.x - 15, center.y + 9.5)
+  context.lineTo(center.x - 15, center.y + 15)
+  context.lineTo(center.x - 9.5, center.y + 15)
+
+  // draw the bottom right bracket
+  context.moveTo(center.x + 15, center.y + 9.5)
+  context.lineTo(center.x + 15, center.y + 15)
+  context.lineTo(center.x + 9.5, center.y + 15)
+
+  context.stroke()
+
+  // draw text coordinates
+  context.fillStyle = 'white'
+  context.font = '9px monospace'
+  context.fillText(center.x.toString(), center.x + 20, center.y - 9)
+  context.fillText(center.y.toString(), center.x + 20, center.y + 14)
 }
 
 const update = () => {
-  // update position to move part of the way towards the target
   position.x += (target.x - position.x) * 0.05
   position.y += (target.y - position.y) * 0.05
 }
@@ -50,7 +81,6 @@ const render = () => {
 window.requestAnimationFrame(render)
 
 canvas.addEventListener('mousemove', (event: MouseEvent) => {
-  // the target is set to the mouse coordinates
   target.x = event.offsetX
   target.y = event.offsetY
 })

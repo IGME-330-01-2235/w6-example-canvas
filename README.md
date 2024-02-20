@@ -1,8 +1,8 @@
 # w6-example-canvas
 
-## canvas-09
+## canvas-10
 
-A dot that follows the mouse, eventually, leaving trails.
+A reticle that follows the mouse.
 
 |                                                                        **Branch** | **Description** |
 | --------------------------------------------------------------------------------: | :-------------- |
@@ -16,3 +16,4 @@ A dot that follows the mouse, eventually, leaving trails.
 | [canvas-07](https://github.com/IGME-330-01-2235/w6-example-canvas/tree/canvas-07) | Mouse Dot       |
 | [canvas-08](https://github.com/IGME-330-01-2235/w6-example-canvas/tree/canvas-08) | Interpolate     |
 | [canvas-09](https://github.com/IGME-330-01-2235/w6-example-canvas/tree/canvas-09) | Streaking       |
+| [canvas-10](https://github.com/IGME-330-01-2235/w6-example-canvas/tree/canvas-10) | Reticle         |
