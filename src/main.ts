@@ -17,6 +17,7 @@ const target: Point = { x: SIZE / 2, y: SIZE / 2 }
 const position: Point = { x: SIZE / 2, y: SIZE / 2 }
 
 const clear = () => {
+  context.resetTransform()
   context.fillStyle = 'rebeccapurple'
   context.fillRect(0, 0, SIZE, SIZE)
 }
@@ -28,42 +29,44 @@ const drawCursor = () => {
     y: Math.floor(position.y) + 0.5,
   }
 
+  context.setTransform(1, 0, 0, 1, center.x, center.y)
+
   context.strokeStyle = 'white'
   context.lineWidth = 1
   context.beginPath()
   // draw the plus in the center
-  context.moveTo(center.x - 4.5, center.y)
-  context.lineTo(center.x + 4.5, center.y)
-  context.moveTo(center.x, center.y - 4.5)
-  context.lineTo(center.x, center.y + 4.5)
+  context.moveTo(-4.5, 0)
+  context.lineTo(4.5, 0)
+  context.moveTo(0, -4.5)
+  context.lineTo(0, 4.5)
 
   // draw the top left bracket
-  context.moveTo(center.x - 15, center.y - 9.5)
-  context.lineTo(center.x - 15, center.y - 15)
-  context.lineTo(center.x - 9.5, center.y - 15)
+  context.moveTo(-15, -9.5)
+  context.lineTo(-15, -15)
+  context.lineTo(-9.5, -15)
 
   // draw the top right bracket
-  context.moveTo(center.x + 15, center.y - 9.5)
-  context.lineTo(center.x + 15, center.y - 15)
-  context.lineTo(center.x + 9.5, center.y - 15)
+  context.moveTo(15, -9.5)
+  context.lineTo(15, -15)
+  context.lineTo(9.5, -15)
 
   // draw the bottom left bracket
-  context.moveTo(center.x - 15, center.y + 9.5)
-  context.lineTo(center.x - 15, center.y + 15)
-  context.lineTo(center.x - 9.5, center.y + 15)
+  context.moveTo(-15, 9.5)
+  context.lineTo(-15, 15)
+  context.lineTo(-9.5, 15)
 
   // draw the bottom right bracket
-  context.moveTo(center.x + 15, center.y + 9.5)
-  context.lineTo(center.x + 15, center.y + 15)
-  context.lineTo(center.x + 9.5, center.y + 15)
+  context.moveTo(15, 9.5)
+  context.lineTo(15, 15)
+  context.lineTo(9.5, 15)
 
   context.stroke()
 
   // draw text coordinates
   context.fillStyle = 'white'
   context.font = '9px monospace'
-  context.fillText(center.x.toString(), center.x + 20, center.y - 9)
-  context.fillText(center.y.toString(), center.x + 20, center.y + 14)
+  context.fillText(center.x.toString(), 20, -9)
+  context.fillText(center.y.toString(), 20, 14)
 }
 
 const update = () => {
