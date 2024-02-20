@@ -19,8 +19,11 @@ const target: Point = { x: SIZE / 2, y: SIZE / 2 }
 // position represents where we are right now
 const position: Point = { x: SIZE / 2, y: SIZE / 2 }
 
+context.fillStyle = 'white'
+context.fillRect(0, 0, SIZE, SIZE)
+
 const clear = () => {
-  context.fillStyle = 'rebeccapurple'
+  context.fillStyle = 'rgba(102, 51, 153, 0.1)'
   context.fillRect(0, 0, SIZE, SIZE)
 }
 
