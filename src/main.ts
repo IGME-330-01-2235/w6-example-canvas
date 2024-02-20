@@ -13,37 +13,41 @@ interface Point {
   x: number
   y: number
 }
-// tracking the last known mouse position
-const mouse: Point = { x: 0, y: 0 }
 
-// blanks out the canvas
+// target represents where we want to be, eventually
+const target: Point = { x: SIZE / 2, y: SIZE / 2 }
+// position represents where we are right now
+const position: Point = { x: SIZE / 2, y: SIZE / 2 }
+
 const clear = () => {
   context.fillStyle = 'rebeccapurple'
   context.fillRect(0, 0, SIZE, SIZE)
 }
 
-// helper function to draw the cursor
 const drawCursor = () => {
   context.fillStyle = 'white'
   context.beginPath()
-  context.arc(mouse.x, mouse.y, 5, 0, 2 * Math.PI)
+  context.arc(position.x, position.y, 5, 0, 2 * Math.PI)
   context.fill()
 }
 
-// what happens every frame
+const update = () => {
+  // update position to move part of the way towards the target
+  position.x += (target.x - position.x) * 0.05
+  position.y += (target.y - position.y) * 0.05
+}
+
 const render = () => {
   clear()
+  update()
   drawCursor()
   window.requestAnimationFrame(render)
 }
 
-// kick off the frame loop
 window.requestAnimationFrame(render)
 
-// listen for when the mouse moves on top of the canvas
-// https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 canvas.addEventListener('mousemove', (event: MouseEvent) => {
-  // update the stored mouse position
-  mouse.x = event.offsetX
-  mouse.y = event.offsetY
+  // the target is set to the mouse coordinates
+  target.x = event.offsetX
+  target.y = event.offsetY
 })

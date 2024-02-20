@@ -1,8 +1,8 @@
 # w6-example-canvas
 
-## canvas-07
+## canvas-08
 
-A dot that follows the mouse.
+A dot that follows the mouse, eventually.
 
 |                                                                        **Branch** | **Description** |
 | --------------------------------------------------------------------------------: | :-------------- |
@@ -14,3 +14,4 @@ A dot that follows the mouse.
 | [canvas-05](https://github.com/IGME-330-01-2235/w6-example-canvas/tree/canvas-05) | Image           |
 | [canvas-06](https://github.com/IGME-330-01-2235/w6-example-canvas/tree/canvas-06) | Clearing        |
 | [canvas-07](https://github.com/IGME-330-01-2235/w6-example-canvas/tree/canvas-07) | Mouse Dot       |
+| [canvas-08](https://github.com/IGME-330-01-2235/w6-example-canvas/tree/canvas-08) | Interpolate     |
