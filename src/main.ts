@@ -8,21 +8,20 @@ canvas.height = SIZE
 
 const context = canvas.getContext('2d') as CanvasRenderingContext2D
 
-// type to hold points
 interface Point {
   x: number
   y: number
 }
 
-// target represents where we want to be, eventually
 const target: Point = { x: SIZE / 2, y: SIZE / 2 }
-// position represents where we are right now
 const position: Point = { x: SIZE / 2, y: SIZE / 2 }
 
+// flash the canvas once to avoid ghosting trails
 context.fillStyle = 'white'
 context.fillRect(0, 0, SIZE, SIZE)
 
 const clear = () => {
+  // draw with a mostly transparent fill to leave a tail
   context.fillStyle = 'rgba(102, 51, 153, 0.1)'
   context.fillRect(0, 0, SIZE, SIZE)
 }
@@ -35,7 +34,6 @@ const drawCursor = () => {
 }
 
 const update = () => {
-  // update position to move part of the way towards the target
   position.x += (target.x - position.x) * 0.05
   position.y += (target.y - position.y) * 0.05
 }
@@ -50,7 +48,6 @@ const render = () => {
 window.requestAnimationFrame(render)
 
 canvas.addEventListener('mousemove', (event: MouseEvent) => {
-  // the target is set to the mouse coordinates
   target.x = event.offsetX
   target.y = event.offsetY
 })
