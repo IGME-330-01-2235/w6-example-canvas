@@ -18,3 +18,4 @@ Details on drawing shapes / fills.
 | [canvas-09](https://github.com/IGME-330-01-2235/w6-example-canvas/tree/canvas-09) | Streaking       |
 | [canvas-10](https://github.com/IGME-330-01-2235/w6-example-canvas/tree/canvas-10) | Reticle         |
 | [canvas-11](https://github.com/IGME-330-01-2235/w6-example-canvas/tree/canvas-11) | Transforms      |
+| [canvas-12](https://github.com/IGME-330-01-2235/w6-example-canvas/tree/canvas-12) | Save Image      |
