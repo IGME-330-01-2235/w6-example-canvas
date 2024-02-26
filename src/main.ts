@@ -1,6 +1,8 @@
 import './styles/reset.css'
 import './styles/styles.css'
 
+const downloadButton = document.getElementById('download')
+
 const SIZE = 600
 const canvas = document.getElementById('canvas') as HTMLCanvasElement
 canvas.width = SIZE
@@ -8,82 +10,61 @@ canvas.height = SIZE
 
 const context = canvas.getContext('2d') as CanvasRenderingContext2D
 
+let isDrawing = false
+
+// set isDrawing to true when pressing the mouse while over the canvas
+canvas.addEventListener('mousedown', () => {
+  isDrawing = true
+})
+
+// set isDrawing to false when releasing the mouse anywhere in the document
+document.addEventListener('mouseup', () => {
+  isDrawing = false
+})
 interface Point {
   x: number
   y: number
 }
 
-const target: Point = { x: SIZE / 2, y: SIZE / 2 }
 const position: Point = { x: SIZE / 2, y: SIZE / 2 }
 
-const clear = () => {
-  context.resetTransform()
-  context.fillStyle = 'rebeccapurple'
-  context.fillRect(0, 0, SIZE, SIZE)
-}
+// update position when the mouse moves over the canvas
+canvas.addEventListener('mousemove', (event: MouseEvent) => {
+  position.x = event.offsetX
+  position.y = event.offsetY
+})
 
-const drawCursor = () => {
-  // use a 0.5 number for crisp 1px lines on the pixel grid
-  const center: Point = {
-    x: Math.floor(position.x) + 0.5,
-    y: Math.floor(position.y) + 0.5,
+// when isDrawing is true, draw a 2px square at the mouse location
+const drawCursorMaybe = () => {
+  if (isDrawing) {
+    const x = Math.floor(position.x)
+    const y = Math.floor(position.y)
+    context.fillStyle = 'white'
+    context.fillRect(x - 1, y - 1, 2, 2)
   }
-
-  context.setTransform(1, 0, 0, 1, center.x, center.y)
-
-  context.strokeStyle = 'white'
-  context.lineWidth = 1
-  context.beginPath()
-  // draw the plus in the center
-  context.moveTo(-4.5, 0)
-  context.lineTo(4.5, 0)
-  context.moveTo(0, -4.5)
-  context.lineTo(0, 4.5)
-
-  // draw the top left bracket
-  context.moveTo(-15, -9.5)
-  context.lineTo(-15, -15)
-  context.lineTo(-9.5, -15)
-
-  // draw the top right bracket
-  context.moveTo(15, -9.5)
-  context.lineTo(15, -15)
-  context.lineTo(9.5, -15)
-
-  // draw the bottom left bracket
-  context.moveTo(-15, 9.5)
-  context.lineTo(-15, 15)
-  context.lineTo(-9.5, 15)
-
-  // draw the bottom right bracket
-  context.moveTo(15, 9.5)
-  context.lineTo(15, 15)
-  context.lineTo(9.5, 15)
-
-  context.stroke()
-
-  // draw text coordinates
-  context.fillStyle = 'white'
-  context.font = '9px monospace'
-  context.fillText(center.x.toString(), 20, -9)
-  context.fillText(center.y.toString(), 20, 14)
-}
-
-const update = () => {
-  position.x += (target.x - position.x) * 0.05
-  position.y += (target.y - position.y) * 0.05
 }
 
 const render = () => {
-  clear()
-  update()
-  drawCursor()
+  drawCursorMaybe()
   window.requestAnimationFrame(render)
 }
 
 window.requestAnimationFrame(render)
 
-canvas.addEventListener('mousemove', (event: MouseEvent) => {
-  target.x = event.offsetX
-  target.y = event.offsetY
+// save the canvas image to a local file
+downloadButton!.addEventListener('click', () => {
+  // Convert our canvas to a data URL
+  const canvasUrl = canvas.toDataURL()
+  // Create an anchor, and set the href value to our data URL
+  const createEl = document.createElement('a')
+  createEl.href = canvasUrl
+
+  console.log(canvasUrl)
+
+  // This is the name of our downloaded file
+  createEl.download = 'canvas-snapshot'
+
+  // Click the download button, causing a download, and then remove it
+  createEl.click()
+  createEl.remove()
 })

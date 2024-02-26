@@ -1,8 +1,8 @@
 # w6-example-canvas
 
-## canvas-11
+## canvas-12
 
-A reticle that follows the mouse - using transforms.
+Drawing to the canvas and saving/downloading an image.
 
 |                                                                        **Branch** | **Description** |
 | --------------------------------------------------------------------------------: | :-------------- |
@@ -18,3 +18,4 @@ A reticle that follows the mouse - using transforms.
 | [canvas-09](https://github.com/IGME-330-01-2235/w6-example-canvas/tree/canvas-09) | Streaking       |
 | [canvas-10](https://github.com/IGME-330-01-2235/w6-example-canvas/tree/canvas-10) | Reticle         |
 | [canvas-11](https://github.com/IGME-330-01-2235/w6-example-canvas/tree/canvas-11) | Transforms      |
+| [canvas-12](https://github.com/IGME-330-01-2235/w6-example-canvas/tree/canvas-12) | Save Image      |
