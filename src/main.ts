@@ -9,7 +9,8 @@ canvas.width = SIZE
 canvas.height = SIZE
 
 const context = canvas.getContext('2d') as CanvasRenderingContext2D
-
+context.fillStyle = 'black'
+context.fillRect(0, 0, SIZE, SIZE)
 let isDrawing = false
 
 // set isDrawing to true when pressing the mouse while over the canvas
